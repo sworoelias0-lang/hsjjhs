@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <!-- Fonts & base stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root{
+            --bg:#f6f8fb;
+            --card:#ffffff;
+            --text:#0f1724;
+            --muted:#556070;
+            --accent:#4f46e5;
+            --glass: rgba(255,255,255,0.6);
+        }
+        :root.dark{
+            --bg:#071024;
+            --card:#0e1624;
+            --text:#e6eef8;
+            --muted:#9aa6b8;
+            --accent:#8b5cf6;
+            --glass: rgba(255,255,255,0.03);
+        }
+
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg,var(--bg), rgba(0,0,0,0.02));
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            line-height:1.5;
+        }
+
+        header{
+            position:sticky;
+            top:0;
+            z-index:40;
+            background:var(--glass);
+            backdrop-filter:blur(6px);
+            border-bottom:1px solid rgba(0,0,0,0.06);
+        }
+        nav{
+            max-width:1000px;
+            margin:0 auto;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:12px 20px;
+            gap:12px;
+        }
+        nav h2{
+            margin:0;
+            font-weight:700;
+            letter-spacing:0.3px;
+        }
+        #menu{list-style:none;display:flex;gap:12px;margin:0;padding:0;align-items:center}
+        #menu a{
+            color:var(--muted);
+            text-decoration:none;
+            padding:8px 10px;
+            border-radius:8px;
+            transition:all .15s ease;
+            font-weight:600;
+        }
+        #menu a:hover{background:rgba(79,70,229,0.08);color:var(--accent);transform:translateY(-2px)}
+
+        #theme-btn{
+            width:44px;height:44px;border-radius:10px;border:0;background:transparent;cursor:pointer;
+            display:grid;place-items:center;font-size:18px;color:var(--muted);
+            transition:transform .12s;
+        }
+        #theme-btn:active{transform:scale(.96)}
+
+        /* Sections */
+        section{max-width:900px;margin:28px auto;padding:18px 20px}
+        #home{text-align:center;padding-top:32px}
+        .profile{width:140px;height:140px;object-fit:cover;border-radius:50%;border:6px solid var(--card);box-shadow:0 12px 30px rgba(11,17,32,0.06)}
+        h1{margin:14px 0 6px;font-size:28px}
+        p{color:var(--muted);margin:8px 0}
+
+        /* Cards & grid */
+        #skills .card, .project{
+            background:var(--card);
+            padding:16px;
+            border-radius:12px;
+            box-shadow:0 8px 22px rgba(11,17,32,0.06);
+        }
+        #skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+        #projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .project h3{margin:0 0 6px}
+        .project a{color:var(--accent);text-decoration:none;font-weight:600}
+
+        /* Contact & footer */
+        #contact a{color:var(--accent);text-decoration:none}
+
+        /* Responsive */
+        @media(max-width:720px){
+            nav{padding:10px}
+            #menu{display:none}
+            .profile{width:120px;height:120px}
+        }
+    </style>
+
+    <!-- Small script for theme toggle (keeps state in localStorage) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const btn = document.getElementById('theme-btn');
+            const root = document.documentElement;
+            function apply(theme){ if(theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark'); }
+            const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            apply(saved);
+            if(btn){
+                btn.innerText = saved === 'dark' ? 'Dark' : 'Light';
+                btn.setAttribute('aria-label','Toggle theme');
+                btn.addEventListener('click', () => {
+                    const now = root.classList.contains('dark') ? 'light' : 'dark';
+                    apply(now);
+                    localStorage.setItem('theme', now);
+                    btn.innerText = now === 'dark' ? 'Dark' : 'Light';
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h2>My Portfolio</h2>
+
+            <ul id="menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <button id="theme-btn"></button>
+        </nav>
+    </header>
+    <!-- HOME -->
+    <section id="home">
+        <img src="This PC\Ira.jpg" alt="Profile Picture" class="profile">
+
+        <h1>Sworo Elias Henry</h1>
+
+        <p>
+            Aspiring Software Developer passionate about
+            web development and problem solving.
+        </p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2>About Me</h2>
+
+        <h3>Education</h3>
+        <p>Diploma of computer science</p>
+
+        <h3>Skills</h3>
+        <p>HTML, CSS, JavaScript, Git, GitHub</p>
+
+        <h3>Career Interests</h3>
+        <p>Frontend Development, Backend Development, Software Engineering</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <h2>Skills</h2>
+
+        <div class="card">
+            <h3>Programming Languages</h3>
+            <p>HTML, CSS, JavaScript</p>
+        </div>
+
+        <div class="card">
+            <h3>Tools</h3>
+            <p>VS Code, Git, GitHub, Netlify</p>
+        </div>
+
+        <div class="card">
+            <h3>Technical Strengths</h3>
+            <p>Responsive Design, Problem Solving, Teamwork</p>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <div class="project">
+            <h3>Portfolio Website</h3>
+            <p>Personal website showcasing my skills.</p>
+            <p>HTML, CSS, JavaScript</p>
+            <a href="#">GitHub Link</a>
+        </div>
+
+        <div class="project">
+            <h3>Student Registration System</h3>
+            <p>Simple registration interface.</p>
+            <p>HTML, CSS, JavaScript</p>
+            <a href="#">GitHub Link</a>
+        </div>
+
+        <div class="project">
+            <h3>Calculator App</h3>
+            <p>Basic calculator application.</p>
+            <p>HTML, CSS, JavaScript</p>
+            <a href="#">GitHub Link</a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact</h2>
+
+        <p>Email: sworoelias0@email.com</p>
+        <p>Phone: +211 920530350</p>
+
+        <a href="#">GitHub</a> |
+        <a href="#">LinkedIn</a>
+    </section>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
